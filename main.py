@@ -10,5 +10,7 @@ test = pd.read_csv(filename)
 
 learning_rate = input("Learning rate: ")
 episodes = input("episodes: ")
-ann(data, "target", [10, 10], 0.01, 100, True, test)
+ann(data, "target", [10, 10], learning_rate, episode, False, test)
+
+test.to_csv("output.csv")
 

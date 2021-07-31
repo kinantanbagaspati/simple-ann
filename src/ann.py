@@ -9,9 +9,7 @@ def sigmoid(x, is_prime):
 def relu(x, is_prime):
     if not(is_prime):
         return max(0, x)
-    if(x>0):
-        return 1
-    return 0
+    return 1
 
 def MSE(array, target):
     toReturn = 0
@@ -49,7 +47,7 @@ def ann(data, label_col, neurons_per_layer, learning_rate, episodes, is_relu, te
     
     #training time
     for i in range(episodes):
-        print("Starting episode " + str(i+1))
+        print("Starting episode " + str(i+1), end = "->")
         for j in range(len(data)):
             #forward propagation
             after_target = False
@@ -86,6 +84,8 @@ def ann(data, label_col, neurons_per_layer, learning_rate, episodes, is_relu, te
                     target[k] = 0
             
             loss = MSE(neurons[len(neurons)-1], target)
+            print(neurons[len(neurons)-1])
+            print("loss:", str(loss))
 
             #back propagation
             for k in range(len(bias)-1, -1, -1):
@@ -93,9 +93,9 @@ def ann(data, label_col, neurons_per_layer, learning_rate, episodes, is_relu, te
                 for l in range(neurons_per_layer[k+1]):
                     if(k == len(bias)-1):
                         if is_relu:
-                            d_bias[k][l] = 2*neurons[k+1][l]*relu(neurons[k+1][l], True)/len(target)
+                            d_bias[k][l] = 2*relu(neurons[k+1][l], False)*relu(neurons[k+1][l], True)/len(target)
                         else:
-                            d_bias[k][l] = 2*neurons[k+1][l]*sigmoid(neurons[k+1][l], True)/len(target)
+                            d_bias[k][l] = 2*sigmoid(neurons[k+1][l], False)*sigmoid(neurons[k+1][l], True)/len(target)
                     else:
                         d_bias[k][l] = 0
                         for m in range(neurons_per_layer[k+2]):
@@ -111,7 +111,7 @@ def ann(data, label_col, neurons_per_layer, learning_rate, episodes, is_relu, te
             #updating weights and bias
             for k in range(len(bias)):
                 for l in range(neurons_per_layer[k+1]):
-                    bias[k][l] += learning_rate * d_bias[k][l] * loss
+                    bias[k][l] -= learning_rate * d_bias[k][l] * loss
                 for l in range(neurons_per_layer[k]):
                     for m in range(neurons_per_layer[k+1]):
                         weight[k][l][m] -= learning_rate * d_weight[k][l][m] * loss
@@ -129,7 +129,7 @@ def ann(data, label_col, neurons_per_layer, learning_rate, episodes, is_relu, te
             d_columns[columns[i]] = i
         else:
             d_columns[columns[i]] = i-1
-    
+
     for i in range(len(test)):
         #forward propagation
         for j in range(len(test.columns)):
