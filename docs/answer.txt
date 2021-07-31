@@ -1,0 +1,21 @@
+a. 
+Forward propagation pada ANN merupakan proses input pada tiap barisan pada data
+yang kemudian diolah hingga menjadi output yang diharapkan.
+Pengolahan ini didasarkan pada beberapa lapis neuron. 
+Tiap nilai neuron ditentukan oleh jumlah tiap neuron lapisan sebelumnya dikalikan dengan sebuah weight yang bersangkutan.
+Jumlah ini kemudian dimasukkan dalam fungsi aktivasi setelah ditambahkan dengan bias.
+b.
+Back propagation adalah saat ANN mengupdate nilai weight dengan metode SGD.
+Tiap weight dihitung pengaruhnya pada total loss dengan memanfaatkan turunan dan aturan rantai.
+Kemudian tiap weight dirambahkan dengan suatu nilai dikalikan gradien (turunan) yang telah dihitung, dikalikan dengan learning rate.
+c.
+Optimizer adalah metode updating weight dari back propagation agar weight lebih sesuai sehingga dapat mengoutput label yang sesuai pada data training.
+Loss function adalah fungsi yang menghitung error dari hasil output sebuah row data terhadap target.
+Activation function adalah gungsi yang menghasilkan penentuan sebuah neuron menyala atau tidak.
+d.
+Mini-Batch Gradient Descent, Momentum, Gradient Descent, dll.
+Mean Absolute Error, Entropy Loss, Hinge Loss, dll.
+Linear, Swish, Binary Step, dll.
+e.
+CNN merupakan struktur layer neuron yang pandai mendeteksi suatu pattern pada gambar. 
+Ini disebabkan penggunaan matrix filter yang meng-highlight-kan pattern yang ingin dicari dalam gambar, menghilangkan pattern yang tidak penting.
